@@ -1658,22 +1658,6 @@ function ReplyContent2(replyToken) {
           contents: [
             {
               type: "bubble",
-              direction: "rtl",
-              hero: {
-                type: "image",
-                url: "https://bored-beret-jay.cyclic.app/images/menu1.jpg",
-                size: "full",
-                aspectRatio: "1.51:1",
-                aspectMode: "fit",
-                action: {
-                  type: "uri",
-                  label: "คลิกที่นี่",
-                  uri: "https://docs.google.com/presentation/d/1ROjKMayHAtDr74utcyEgc7BFiiNAEwTM_wQ3KFb_WzE/edit?usp=sharing",
-                },
-              },
-            },
-            {
-              type: "bubble",
               direction: "ltr",
               hero: {
                 type: "image",
