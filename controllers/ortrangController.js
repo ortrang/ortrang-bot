@@ -387,9 +387,9 @@ exports.index = async (req, res, next) => {
           );
         }
       );
-    } else if (req.body.events[0].postback.data === "การจัดการไส้เลื่อน") {
+    } else if (req.body.events[0].postback.data === "การผ่าตัดไส้เลื่อนขาหนีบ") {
       ReplyContent1(replyToken);
-    } else if (req.body.events[0].postback.data === "การผ่าตัดถุงน้ำดี") {
+    } else if (req.body.events[0].postback.data === "การปฏิบัติตัวในการเข้ารับการผ่าตัด") {
       ReplyContent2(replyToken);
     } else if (req.body.events[0].postback.data === "พูดคุยกับเจ้าหน้าที่") {
       Replyoffice2(replyToken);
@@ -1562,18 +1562,18 @@ function ReplyContent(replyToken) {
               type: "action",
               action: {
                 type: "postback",
-                label: "การจัดการไส้เลื่อน",
-                data: "การจัดการไส้เลื่อน",
-                displayText: "การจัดการไส้เลื่อน",
+                label: "การผ่าตัดไส้เลื่อนขาหนีบ",
+                data: "การผ่าตัดไส้เลื่อนขาหนีบ",
+                displayText: "การผ่าตัดไส้เลื่อนขาหนีบ",
               },
             },
             {
               type: "action",
               action: {
                 type: "postback",
-                label: "การผ่าตัดถุงน้ำดี",
-                data: "การผ่าตัดถุงน้ำดี",
-                displayText: "การผ่าตัดถุงน้ำดี",
+                label: "การปฏิบัติตัวในการเข้ารับการผ่าตัด",
+                data: "การปฏิบัติตัวในการเข้ารับการผ่าตัด",
+                displayText: "การปฏิบัติตัวในการเข้ารับการผ่าตัด",
               },
             },
           ],
@@ -1601,7 +1601,7 @@ function ReplyContent1(replyToken) {
                 contents: [
                   {
                     type: "text",
-                    text: "การจัดการไส้เลื่อน",
+                    text: "การผ่าตัดไส้เลื่อนขาหนีบ",
                     weight: "bold",
                     size: "lg",
                     align: "center",
