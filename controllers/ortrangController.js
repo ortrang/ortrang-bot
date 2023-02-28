@@ -1661,7 +1661,7 @@ function ReplyContent2(replyToken) {
               direction: "ltr",
               hero: {
                 type: "image",
-                url: "https://bored-beret-jay.cyclic.app/images/menu2.jpg",
+                url: "https://bored-beret-jay.cyclic.app/images/menu02.jpg",
                 size: "full",
                 aspectRatio: "1.51:1",
                 aspectMode: "fit",
@@ -1677,7 +1677,7 @@ function ReplyContent2(replyToken) {
               direction: "ltr",
               hero: {
                 type: "image",
-                url: "https://bored-beret-jay.cyclic.app/images/menu3.jpg",
+                url: "https://bored-beret-jay.cyclic.app/images/menu03.jpg",
                 size: "full",
                 aspectRatio: "1.51:1",
                 aspectMode: "fit",
@@ -1693,7 +1693,7 @@ function ReplyContent2(replyToken) {
               direction: "ltr",
               hero: {
                 type: "image",
-                url: "https://bored-beret-jay.cyclic.app/images/menu4.jpg",
+                url: "https://bored-beret-jay.cyclic.app/images/menu04.jpg",
                 size: "full",
                 aspectRatio: "1.51:1",
                 aspectMode: "fit",
