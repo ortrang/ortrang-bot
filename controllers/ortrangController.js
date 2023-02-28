@@ -389,7 +389,7 @@ exports.index = async (req, res, next) => {
       );
     } else if (req.body.events[0].postback.data === "การผ่าตัดไส้เลื่อนขาหนีบ") {
       ReplyContent1(replyToken);
-    } else if (req.body.events[0].postback.data === "การปฏิบัติตัวในการเข้ารับการผ่าตัด") {
+    } else if (req.body.events[0].postback.data === "การปฏิบัติตัวเข้ารับผ่าตัด") {
       ReplyContent2(replyToken);
     } else if (req.body.events[0].postback.data === "พูดคุยกับเจ้าหน้าที่") {
       Replyoffice2(replyToken);
@@ -1571,9 +1571,9 @@ function ReplyContent(replyToken) {
               type: "action",
               action: {
                 type: "postback",
-                label: "การปฏิบัติตัวในการเข้ารับการผ่าตัด",
-                data: "การปฏิบัติตัวในการเข้ารับการผ่าตัด",
-                displayText: "การปฏิบัติตัวในการเข้ารับการผ่าตัด",
+                label: "การปฏิบัติตัวเข้ารับผ่าตัด",
+                data: "การปฏิบัติตัวเข้ารับผ่าตัด",
+                displayText: "การปฏิบัติตัวเข้ารับผ่าตัด",
               },
             },
           ],
