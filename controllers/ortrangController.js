@@ -138,25 +138,6 @@ exports.index = async (req, res, next) => {
           });
         }
       )
-    } else if (req.body.events[0].postback.data === "ยกเลิก") {
-      request(
-        {
-          method: "GET",
-          uri: `${URL_API}/users/${useridline}`,
-          headers: {
-            "Content-Type": "application/json",
-          },
-        },
-        (err, res, body) => {
-          const detail = JSON.parse(body);
-          //console.log("delete",detail.data);
-          if (detail.data.status === false) {
-            setToDeleteDB(replyToken, detail.data);
-          } else {
-            ReplyRegister(replyToken, "เคยมีการลงทะเบียนแล้วค่ะ \udbc0\udcb3");
-          }
-        }
-      );
     } else if (req.body.events[0].postback.data === "การผ่าตัดไส้เลื่อนขาหนีบ") {
       ReplyContent1(replyToken);
     } else if (req.body.events[0].postback.data === "การปฏิบัติตัวเข้ารับผ่าตัด") {
@@ -418,15 +399,6 @@ function ReplyDetailRegister(replyToken, data) {
                 type: "box",
                 layout: "horizontal",
                 contents: [
-                  {
-                    type: "button",
-                    action: {
-                      type: "postback",
-                      label: "ยกเลิก",
-                      text: "ยกเลิก",
-                      data: "ยกเลิก",
-                    },
-                  },
                   {
                     type: "button",
                     action: {
