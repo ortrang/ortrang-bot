@@ -15,9 +15,10 @@ exports.index = async (req, res, next) => {
   let replyToken = req.body.events[0].replyToken;
   let useridline = req.body.events[0].source.userId;
 
+  console.log(useridline);
+
   if (req.body.events[0].type == "message") {
     if (req.body.events[0].message.text === "ลงทะเบียน") {
-      
       request(
         {
           method: "GET",
@@ -28,7 +29,7 @@ exports.index = async (req, res, next) => {
         },
         (err, res, body) => {
           const detail = JSON.parse(body);
-          console.log("ลงทะเบียน",detail);
+          console.log("ลงทะเบียน", detail);
           if (detail.data.status === true) {
             ReplyRegister(replyToken, "เคยมีการลงทะเบียนแล้วค่ะ \udbc0\udcb3");
           } else {
@@ -39,12 +40,52 @@ exports.index = async (req, res, next) => {
                 headers: LINE_HEADER,
               },
               (err, res, body) => {
-                const detail2 = JSON.parse(body);
-                ReplyDetailRegister(replyToken, detail2)
-                
-              })
+                const detail = JSON.parse(body);
+                const bodyJSON = {
+                  prefixes: "",
+                  name: "",
+                  gender: "",
+                  age: "",
+                  birthday: "",
+                  address: "",
+                  tel: "",
+                  rights: "",
+                  telcontact: "",
+                  status: true,
+                  lineid: useridline,
+                  linename: detail.displayName,
+                  lineimg: detail.pictureUrl,
+                  step: "1",
+                };
+
+                request({
+                  method: "POST",
+                  uri: `${URL_API}/users`,
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify(bodyJSON),
+                }).then((response) => {
+                  const step1 = JSON.parse(response);
+                  console.log("STEP1", step1);
+                  if (step1.status === "OK") {
+                    //ReplyQuiz(replyToken);
+                    request(
+                      {
+                        method: "GET",
+                        uri: `https://api.line.me/v2/bot/profile//${useridline}`,
+                        headers: LINE_HEADER,
+                      },
+                      (err, res, body) => {
+                        const detail2 = JSON.parse(body);
+                        ReplyDetailRegister(replyToken, detail2);
+                      }
+                    );
+                  }
+                });
+              }
+            );
           }
-          
         }
       );
     } else if (req.body.events[0].message.text === "สาระน่ารู้") {
@@ -91,56 +132,58 @@ exports.index = async (req, res, next) => {
           }
         }
       );
-    } 
+    }
   }
 
   if (req.body.events[0].type == "postback") {
-    if (req.body.events[0].postback.data === "ตกลง") {
-      
-      request(
-        {
-          method: "GET",
-          uri: `https://api.line.me/v2/bot/profile//${useridline}`,
-          headers: LINE_HEADER,
-        },
-        (err, res, body) => {
-          const detail = JSON.parse(body);
-          const bodyJSON = {
-            prefixes: "",
-            name: "",
-            gender: "",
-            age: "",
-            birthday: "",
-            address: "",
-            tel: "",
-            rights: "",
-            telcontact: "",
-            status: true,
-            lineid: useridline,
-            linename: detail.displayName,
-            lineimg: detail.pictureUrl,
-            step: "1",
-          };
+    // if (req.body.events[0].postback.data === "ตกลง") {
+    //   request(
+    //     {
+    //       method: "GET",
+    //       uri: `https://api.line.me/v2/bot/profile//${useridline}`,
+    //       headers: LINE_HEADER,
+    //     },
+    //     (err, res, body) => {
+    //       const detail = JSON.parse(body);
+    //       const bodyJSON = {
+    //         prefixes: "",
+    //         name: "",
+    //         gender: "",
+    //         age: "",
+    //         birthday: "",
+    //         address: "",
+    //         tel: "",
+    //         rights: "",
+    //         telcontact: "",
+    //         status: true,
+    //         lineid: useridline,
+    //         linename: detail.displayName,
+    //         lineimg: detail.pictureUrl,
+    //         step: "1",
+    //       };
 
-          request({
-            method: "POST",
-            uri: `${URL_API}/users`,
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(bodyJSON),
-          }).then((response) => {
-            const step1 = JSON.parse(response);
-            console.log("STEP1", step1);
-            if (step1.status === "OK") {
-              ReplyQuiz(replyToken);
-            }
-          });
-        }
-      )
-    } else if (req.body.events[0].postback.data === "การผ่าตัดไส้เลื่อนขาหนีบ") {
+    //       request({
+    //         method: "POST",
+    //         uri: `${URL_API}/users`,
+    //         headers: {
+    //           "Content-Type": "application/json",
+    //         },
+    //         body: JSON.stringify(bodyJSON),
+    //       }).then((response) => {
+    //         const step1 = JSON.parse(response);
+    //         console.log("STEP1", step1);
+    //         if (step1.status === "OK") {
+    //           ReplyQuiz(replyToken);
+    //         }
+    //       });
+    //     }
+    //   );
+    // } else
+    if (req.body.events[0].postback.data === "การผ่าตัดไส้เลื่อนขาหนีบ") {
       ReplyContent1(replyToken);
-    } else if (req.body.events[0].postback.data === "การปฏิบัติตัวเข้ารับผ่าตัด") {
+    } else if (
+      req.body.events[0].postback.data === "การปฏิบัติตัวเข้ารับผ่าตัด"
+    ) {
       ReplyContent2(replyToken);
     } else if (req.body.events[0].postback.data === "พูดคุยกับเจ้าหน้าที่") {
       Replyofficer(replyToken);
@@ -150,7 +193,7 @@ exports.index = async (req, res, next) => {
   //res.send('Hi');
 };
 
-function ReplyQuiz(replyToken){
+function ReplyQuiz(replyToken) {
   let body = JSON.stringify({
     replyToken: replyToken,
     messages: [
@@ -230,7 +273,6 @@ function ReplyQuiz(replyToken){
     ],
   });
   DetailReply(body);
-
 }
 
 const setToDeleteDB = async (replyToken, body) => {
@@ -276,15 +318,6 @@ function ReplySuccess(replyToken) {
 }
 function ReplyDetailRegister(replyToken, data) {
   console.log("สำเร็จ", data);
-
-  // const datebirthday = new Date(data.birthday);
-
-  // let month = datebirthday.getMonth() + 1; // 11
-  // let day = datebirthday.getDate(); // 29
-  // let year = datebirthday.getFullYear(); // 2011
-
-  // let birthdayfull = day + "/" + month + "/" + year;
-  // console.log("birthdayfull", birthdayfull);
 
   let body = JSON.stringify({
     replyToken: replyToken,
@@ -335,7 +368,7 @@ function ReplyDetailRegister(replyToken, data) {
                         text: "line name : " + data.displayName,
                         color: "#467EAC",
                         wrap: true,
-                        align: "center"
+                        align: "center",
                       },
                       // {
                       //   type: "text",
@@ -402,10 +435,9 @@ function ReplyDetailRegister(replyToken, data) {
                   {
                     type: "button",
                     action: {
-                      type: "postback",
+                      type: "uri",
                       label: "ตกลง",
-                      text: "ตกลง",
-                      data: "ตกลง",
+                      uri: "https://docs.google.com/forms/d/e/1FAIpQLSeHRtAhKrdSw0Q70W5xgeQiHyTNRUF4VeAmfVK-U_g8BXrU6Q/viewform?openExternalBrowser=1",
                     },
                   },
                 ],
