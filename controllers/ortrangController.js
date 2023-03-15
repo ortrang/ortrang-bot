@@ -187,6 +187,10 @@ exports.index = async (req, res, next) => {
       ReplyContent2(replyToken);
     } else if (req.body.events[0].postback.data === "พูดคุยกับเจ้าหน้าที่") {
       Replyofficer(replyToken);
+    } else if (
+      req.body.events[0].postback.data === "การส่องตรวจปากมดลูก"
+    ){
+      ReplyContent3(replyToken);
     }
   }
 
@@ -611,6 +615,15 @@ function ReplyContent(replyToken) {
               type: "action",
               action: {
                 type: "postback",
+                label: "การส่องตรวจปากมดลูก",
+                data: "การส่องตรวจปากมดลูก",
+                displayText: "การส่องตรวจปากมดลูก",
+              },
+            },
+            {
+              type: "action",
+              action: {
+                type: "postback",
                 label: "การปฏิบัติตัวเข้ารับผ่าตัด",
                 data: "การปฏิบัติตัวเข้ารับผ่าตัด",
                 displayText: "การปฏิบัติตัวเข้ารับผ่าตัด",
@@ -757,6 +770,68 @@ function ReplyContent2(replyToken) {
                   label: "คลิกที่นี่",
                   uri: "https://docs.google.com/presentation/d/18tgTD3CeO6eqbNP09P8s9ti4TEU6oc7vvEXb8WELkow/edit?usp=sharing",
                 },
+              },
+            },
+          ],
+        },
+      },
+    ],
+  });
+  DetailReply(body);
+}
+function ReplyContent3(replyToken) {
+  let body = JSON.stringify({
+    replyToken: replyToken,
+    messages: [
+      {
+        type: "flex",
+        altText: "Flex Message",
+        contents: {
+          type: "carousel",
+          contents: [
+            {
+              type: "bubble",
+              header: {
+                type: "box",
+                layout: "horizontal",
+                contents: [
+                  {
+                    type: "text",
+                    text: "การส่องตรวจปากมดลูก",
+                    weight: "bold",
+                    size: "lg",
+                    align: "center",
+                    contents: [],
+                  },
+                ],
+              },
+              hero: {
+                type: "image",
+                url: "https://bored-beret-jay.cyclic.app/images/img03.jpg",
+                size: "full",
+                aspectRatio: "1.52:1",
+                aspectMode: "cover",
+                action: {
+                  type: "uri",
+                  label: "Action",
+                  uri: "https://linecorp.com/",
+                },
+              },
+              footer: {
+                type: "box",
+                layout: "horizontal",
+                contents: [
+                  {
+                    type: "button",
+                    action: {
+                      type: "uri",
+                      label: "คลิกที่นี่",
+                      uri: "https://anyflip.com/dcll/oreb/",
+                    },
+                    color: "#03B0AFFF",
+                    gravity: "center",
+                  },
+                ],
               },
             },
           ],
