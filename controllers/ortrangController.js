@@ -376,7 +376,7 @@ function ReplyDetailRegister(replyToken, data) {
                       },
                       {
                          type: "text",
-                         text: "ขั้นตอนการลงทะเบียน กด ตกลง >> ทำแบบสอบถาม",
+                         text: "ขั้นตอนการลงทะเบียน กด ตกลง >> ทำแบบสอบถาม >> กด Submit",
                          color: "#467EAC",
                          wrap: true,
                        },
