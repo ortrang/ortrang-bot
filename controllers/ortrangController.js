@@ -374,12 +374,12 @@ function ReplyDetailRegister(replyToken, data) {
                         wrap: true,
                         align: "center",
                       },
-                      // {
-                      //   type: "text",
-                      //   text: "คำนำหน้าชื่อ : " + data.prefixes,
-                      //   color: "#467EAC",
-                      //   wrap: true,
-                      // },
+                      {
+                         type: "text",
+                         text: "ขั้นตอนการลงทะเบียน กด ตกลง >> ทำแบบสอบถาม  \udbc0\udcb3",
+                         color: "#467EAC",
+                         wrap: true,
+                       },
                       // {
                       //   type: "text",
                       //   text: "ชื่อ : " + data.name,
