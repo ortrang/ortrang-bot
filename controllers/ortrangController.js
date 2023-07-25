@@ -189,7 +189,7 @@ exports.index = async (req, res, next) => {
       req.body.events[0].postback.data === "การผ่าตัดนิ่วในถุงน้ำดี"
     )
 	{
-	ReplyContent3(replyToken);
+	ReplyContent4(replyToken);
 	}
  else if (req.body.events[0].postback.data === "พูดคุยกับเจ้าหน้าที่") {
       Replyofficer(replyToken);
@@ -713,7 +713,7 @@ function ReplyContent1(replyToken) {
   });
   DetailReply(body);
 }
-function ReplyContent3(replyToken) {
+function ReplyContent4(replyToken) {
   let body = JSON.stringify({
     replyToken: replyToken,
     messages: [
