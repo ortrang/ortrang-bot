@@ -741,7 +741,7 @@ function ReplyContent4(replyToken) {
               },
               hero: {
                 type: "image",
-                url: "https://bored-beret-jay.cyclic.app/images/imgvideo2.jpg",
+                url: "https://bored-beret-jay.cyclic.app/images/imgvideo3.jpg",
                 size: "full",
                 aspectRatio: "1.52:1",
                 aspectMode: "cover",
