@@ -185,7 +185,13 @@ exports.index = async (req, res, next) => {
       req.body.events[0].postback.data === "การปฏิบัติตัวเข้ารับผ่าตัด"
     ) {
       ReplyContent2(replyToken);
-    } else if (req.body.events[0].postback.data === "พูดคุยกับเจ้าหน้าที่") {
+    } else if (
+      req.body.events[0].postback.data === "การผ่าตัดนิ่วในถุงน้ำดี"
+    )
+	{
+	ReplyContent3(replyToken);
+	}
+ else if (req.body.events[0].postback.data === "พูดคุยกับเจ้าหน้าที่") {
       Replyofficer(replyToken);
     } else if (
       req.body.events[0].postback.data === "การส่องตรวจปากมดลูก"
@@ -629,6 +635,15 @@ function ReplyContent(replyToken) {
                 displayText: "การปฏิบัติตัวเข้ารับผ่าตัด",
               },
             },
+	      {
+              type: "action",
+              action: {
+                type: "postback",
+                label: "การผ่าตัดนิ่วในถุงน้ำดี",
+                data: "การผ่าตัดนิ่วในถุงน้ำดี",
+                displayText: "การผ่าตัดนิ่วในถุงน้ำดี",
+              },
+            },
           ],
         },
       },
@@ -684,6 +699,68 @@ function ReplyContent1(replyToken) {
                       type: "uri",
                       label: "Play",
                       uri: "https://youtu.be/vr9_59-e-yI",
+                    },
+                    color: "#03B0AFFF",
+                    gravity: "center",
+                  },
+                ],
+              },
+            },
+          ],
+        },
+      },
+    ],
+  });
+  DetailReply(body);
+}
+function ReplyContent3(replyToken) {
+  let body = JSON.stringify({
+    replyToken: replyToken,
+    messages: [
+      {
+        type: "flex",
+        altText: "Flex Message",
+        contents: {
+          type: "carousel",
+          contents: [
+            {
+              type: "bubble",
+              header: {
+                type: "box",
+                layout: "horizontal",
+                contents: [
+                  {
+                    type: "text",
+                    text: "การผ่าตัดนิ่วในถุงน้ำดี",
+                    weight: "bold",
+                    size: "lg",
+                    align: "center",
+                    contents: [],
+                  },
+                ],
+              },
+              hero: {
+                type: "image",
+                url: "https://bored-beret-jay.cyclic.app/images/imgvideo.jpg",
+                size: "full",
+                aspectRatio: "1.52:1",
+                aspectMode: "cover",
+                action: {
+                  type: "uri",
+                  label: "Action",
+                  uri: "https://linecorp.com/",
+                },
+              },
+              footer: {
+                type: "box",
+                layout: "horizontal",
+                contents: [
+                  {
+                    type: "button",
+                    action: {
+                      type: "uri",
+                      label: "Play",
+                      uri: "https://drive.google.com/file/d/1G0JAzNPclUOZiyIPpFsRcI_eRS6QieLL/view?pli=1",
                     },
                     color: "#03B0AFFF",
                     gravity: "center",
